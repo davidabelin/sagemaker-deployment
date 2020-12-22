@@ -78,8 +78,18 @@ def train(model, train_loader, epochs, optimizer, loss_fn, device):
             batch_X = batch_X.to(device)
             batch_y = batch_y.to(device)
             
-            # DONE: Complete this train method to train the model provided.
-            loss = loss_fn( model(batch_X) , batch_y)
+            # TODO: Complete this train method to train the model provided.
+            # loss = loss_fn( model(batch_X) , batch_y)
+            # From: https://github.com/enginBozkurt/deep-learning-nanodegree/blob/master/Project%20-%205%20Deploying%20a%20Sentiment%20Analysis%20Model/train/train.py
+            optimizer.zero_grad()
+            # forward pass
+            output = model.forward(batch_X)
+            # calculate the batch loss
+            loss = loss_fn(output, batch_y)
+            # backpropagation
+            loss.backward()
+            #optimization
+            optimizer.step()
             
             total_loss += loss.data.item()
         print("Epoch: {}, BCELoss: {}".format(epoch, total_loss / len(train_loader)))

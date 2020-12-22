@@ -88,4 +88,4 @@ def predict_fn(input_data, model):
 
     result = model(data)
 
-    return result
+    return np.squeeze(result)
